@@ -10,6 +10,7 @@ namespace Api_farmancias.Model
         public int Id {get;set;}
         public int Codigo_ip{get;set;}
 
+
         
     }
 }
