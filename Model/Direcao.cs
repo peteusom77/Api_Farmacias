@@ -7,6 +7,7 @@ namespace Api_farmancias.Model
 {
     public class Direcao
     {
+        public int id {get;set;}
         public string? Provincia {get;set;}
         public string? Municipio{get;set;}
         public string? Rua{get;set;}
