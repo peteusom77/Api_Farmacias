@@ -15,7 +15,7 @@ namespace Api_Farmancias.Repositorio
             _dbcontext =appdbcontext;
         }
 
-        public Task<Farmacia> Adicionar(Farmacia farmancia)
+        public Task<Farmacia> AdicionarFarmacia(Farmacia farmancia)
         {
            throw new NotImplementedException();
         }
