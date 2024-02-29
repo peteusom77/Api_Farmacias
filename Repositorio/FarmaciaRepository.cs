@@ -59,9 +59,6 @@ namespace Api_Farmancias.Repositorio
             return true;
         }
 
-        public Task<bool> SaveAllAsync()
-        {
-            throw new NotImplementedException();
-        }
+    
     }
 }

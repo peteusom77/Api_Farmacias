@@ -10,10 +10,10 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("Api_Farmacias")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("Api_farmacias")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1ca92ddf686325b9634516991772667395e48142")]
 [assembly: System.Reflection.AssemblyProductAttribute("Api_farmacias")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Api_farmacias")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

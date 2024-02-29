@@ -23,6 +23,7 @@ namespace Api_Farmacias.Model
         public string? Nome {get;set;}
         [Column("nif")]
         public long NIF {get;set;}
+        [Column("email")]
         public string? Email{get;set;}
         [Column("horadeabertura")]
         public DateTime HoraDeabertura{get;set;}

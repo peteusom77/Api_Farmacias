@@ -37,7 +37,7 @@ namespace Api_Farmacias.Controllers
         public async Task<ActionResult<Farmacia>>Adicionarfarm([FromBody] Farmacia farmacia)
         {
             Farmacia farmacias = await _farmfonte.AdicionarFarmacia(farmacia);
-            return Ok(await _farmfonte.SaveAllAsync());
+            return Ok(farmacias);
         }
 
         [HttpPut("{id}")]

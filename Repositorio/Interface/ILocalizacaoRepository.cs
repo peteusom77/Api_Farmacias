@@ -12,5 +12,6 @@ namespace Api_Farmacias.Repositorio.Interface
         Task<Localizacao> AdicionarLocali(Localizacao localizacao);
         Task<Localizacao> Atualizar(Localizacao localizacao,int id);
         Task<Farmacia> BuscarEmailPorId(int id);
+        
     }
 }

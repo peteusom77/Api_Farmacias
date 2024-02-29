@@ -9,6 +9,6 @@ namespace Api_Farmancias.Repositorio.InterFace
         Task<Farmacia> AdicionarFarmacia(Farmacia farmancia);
         Task <Farmacia> Atualizar(Farmacia farmancia, int id);
          Task<bool> Apagar(int id);
-         Task<bool> SaveAllAsync();
+         
     }
 }
