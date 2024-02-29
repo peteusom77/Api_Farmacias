@@ -1,6 +1,5 @@
-using Api_farmacias.Model;
 using Api_Farmacias.Model;
-using Api_Farmancias.DAL.Database;
+using Api_Farmancias.Database;
 using Api_Farmancias.Repositorio.InterFace;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,35 +8,55 @@ namespace Api_Farmancias.Repositorio
 {
     public class FarmaciaRepository : IFarmaciaRepisitory
     {
-        protected readonly Appdbcontext _dbcontext;
-        public FarmaciaRepository(Appdbcontext appdbcontext)
+        private readonly Appdbcontext _conexao;
+        public FarmaciaRepository(Appdbcontext conexaoDB)
         {
-            _dbcontext =appdbcontext;
+            _conexao = conexaoDB;
         }
 
-        public Task<Farmacia> AdicionarFarmacia(Farmacia farmancia)
+       public async Task<List<Farmacia>> Farmancias()
         {
-           throw new NotImplementedException();
+            return await _conexao.farmancias.ToListAsync();
+        }
+        public async Task<Farmacia> BuscarFarmacia(int id)
+        {
+            return await _conexao.farmancias.FirstOrDefaultAsync(x => x.Id == id);
+        }
+        public async Task<Farmacia> AdicionarFarmacia(Farmacia farmacia)
+        {
+            await _conexao.farmancias.AddAsync(farmacia);
+            await _conexao.SaveChangesAsync();
+            return farmacia;
+        }
+        public async Task<Farmacia> Atualizar(Farmacia farmacia, int id)
+        {
+            Farmacia farmaciaid = await BuscarFarmacia(id);
+            if(farmaciaid == null)
+            {
+                throw new Exception($"Farmacia para o ID:{id} nao encontrado.");
+            }
+
+            farmaciaid.Nome = farmacia.Nome;
+            farmacia.Email=farmacia.Email;
+            
+
+            _conexao.farmancias.Update(farmaciaid);
+            await _conexao.SaveChangesAsync();
+
+            return farmaciaid;
         }
 
-        public Task<bool> Apagar(int id)
+        public async Task<bool> Apagar(int id)
         {
-            throw new NotImplementedException();
-        }
+            Farmacia farmaciaid = await BuscarFarmacia(id);
+            if(farmaciaid == null)
+            {
+                throw new Exception($"Farmacia para o ID:{id} nao encontrado.");
+            }
 
-        public Task<Farmacia> Atualizar(Farmacia farmancia)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Farmacia> BuscarFarmacia(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Farmacia>> Farmancias()
-        {
-            throw new NotImplementedException();
+            _conexao.farmancias.Remove(farmaciaid);
+            await _conexao.SaveChangesAsync();
+            return true;
         }
 
         public Task<bool> SaveAllAsync()

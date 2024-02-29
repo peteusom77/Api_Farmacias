@@ -1,7 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Api_Farmacias.Model;
-using Api_Farmancias.DAL.Database;
+using Api_Farmancias.Database;
 using Api_Farmancias.Repositorio;
 using Api_Farmancias.Repositorio.InterFace;
 
