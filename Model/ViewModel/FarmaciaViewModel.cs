@@ -10,7 +10,7 @@ using Microsoft.VisualBasic;
 namespace Api_farmacias.Model
 {
    
-    public class Farmacia
+    public class FarmaciaViewModel
     {
 
        
