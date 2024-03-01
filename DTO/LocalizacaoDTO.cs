@@ -6,10 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Api_Farmacias.Model;
 
-namespace Api_farmancias.Model
+namespace Api_Farmancias.Model
 {
     
-    public class Localizacao
+    public class LocalizacaoDTO
     {
         
         public int Codigo_ip{get;set;}

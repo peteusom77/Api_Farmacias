@@ -7,10 +7,10 @@ using Api_Farmacias.Model;
 using Api_Farmancias.Model;
 using Microsoft.VisualBasic;
 
-namespace Api_farmacias.Model
+namespace Api_Farmacias.Model
 {
    
-    public class Farmacia
+    public class FarmaciaDTO
     {
 
        

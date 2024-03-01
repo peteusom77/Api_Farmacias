@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Api_farmancias.Model
+namespace Api_Farmancias.Model
 {
-    public class Direcao
+    public class DirecaoDTO
     {
         
         public string? Provincia {get;set;}
