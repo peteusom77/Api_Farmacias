@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "rI/IJN5oSWhccQACVS6kXW36x1MTQ/P0BqrEDVZe1BnXD3RWveIdu35hsRyzQd6xBGK62z//5SMq21e5CvvqQg==",
+  "dgSpecHash": "ri7IwWTS/S6YFMHaj2/pCWEiWSioSNpFec7HQym1wZBljZiHWb7fITC6NuzMuhUvv24dDEhifSHZHxkOVIiG3g==",
   "success": true,
   "projectFilePath": "C:\\Users\\peteusom\\Desktop\\Estudos\\programacaoGeral\\exercicios c#\\Api_Farmacias\\Api_Farmacias.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\peteusom\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\peteusom\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\peteusom\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\peteusom\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.3.3\\microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",
