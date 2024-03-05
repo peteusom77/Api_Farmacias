@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Api_Farmacias.Model;
 using Api_Farmancias.Repositorio.InterFace;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api_Farmacias.Controllers
@@ -13,46 +16,50 @@ namespace Api_Farmacias.Controllers
     public class FarmaciaControllers:ControllerBase
     {
         protected readonly IFarmaciaRepisitory _farmfonte;
-        public FarmaciaControllers(IFarmaciaRepisitory farmfonte)
+        private readonly IMapper _mapper;
+        public FarmaciaControllers(IFarmaciaRepisitory farmfonte,IMapper mapper)
         {
             _farmfonte=farmfonte;
+            _mapper=mapper;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<Farmacia>>> BuscartodasFarmacia()
+        [HttpGet("ListarFarmacias")]
+        public async Task<ActionResult<List<FarmaciaDTO>>> BuscartodasFarmacia()
         {
-            List<Farmacia> farmacias = await _farmfonte.Farmancias();
+            List<FarmaciaDTO> farmacias = await _farmfonte.Farmancias();
             return Ok(farmacias);
         }
         
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Farmacia>> Buscarfarmacia(int id)
+        [HttpGet("BuscarFarmacia{id}")]
+        public async Task<ActionResult<FarmaciaDTO>> Buscarfarmacia(int id)
         {
-            Farmacia farmacias = await _farmfonte.BuscarFarmacia(id);
+            FarmaciaDTO farmacias = await _farmfonte.BuscarFarmacia(id);
             return Ok(farmacias);
         }
 
         [HttpPost]
-        [Route("adicionar")]
-        public async Task<ActionResult<Farmacia>>Adicionarfarm([FromBody] Farmacia farmacia)
+        [Route("adicionarFarmacia")]
+        public async Task<ActionResult<Farmacia>>Adicionarfarm([FromBody] FarmaciaDTO farmacia)
         {
             Farmacia farmacias = await _farmfonte.AdicionarFarmacia(farmacia);
-            return Ok(farmacias);
+            var options = new JsonSerializerOptions
+    {
+        ReferenceHandler = ReferenceHandler.Preserve
+    };
+
+    string json = JsonSerializer.Serialize(farmacias, options);
+
+    return Ok(json);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Farmacia>> Atualiza([FromBody] Farmacia farmacia1, int id)
+        [HttpPut("AtualizarFarmacia{id:int}")]
+        public async Task<ActionResult<Farmacia>> Atualiza([FromBody] FarmaciaDTO farmacia1, int id)
         {
-            farmacia1.Id = id;
-            Farmacia farmacia = await _farmfonte.Atualizar(farmacia1, id);
+            farmacia1.Id = id; 
+            var farmacia = await _farmfonte.Atualizar(farmacia1, id);
             return Ok(farmacia);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Farmacia>> Deletar(int id)
-        {
-            bool apagado = await _farmfonte.Apagar(id);
-            return Ok(apagado); 
-        }
+    
     }
 }

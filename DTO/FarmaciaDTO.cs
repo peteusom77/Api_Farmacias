@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Api_Farmacias.Model;
 using Api_Farmancias.Model;
@@ -12,8 +13,8 @@ namespace Api_Farmacias.Model
    
     public class FarmaciaDTO
     {
-
-       
+        [JsonIgnore]
+         public int Id {get;set;}
         public string? Nome {get;set;}
        
         public long NIF {get;set;}
@@ -22,7 +23,9 @@ namespace Api_Farmacias.Model
         public DateTime HoraDeabertura{get;set;}
   
         public DateTime HoraDeEncerramento{get;set;}
-   
+        public LocalizacaoDTO Localizacao { get; set; }
+        
+
 
     }
 }

@@ -12,7 +12,7 @@ namespace Api_Farmancias.Model
     public class LocalizacaoDTO
     {
         
-        public int Codigo_ip{get;set;}
+        public string?  Codigo_ip{get;set;}
        
 
 

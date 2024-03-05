@@ -12,11 +12,6 @@ namespace Api_Farmacias.Model
     [Table("farmacia")]
     public class Farmacia
     {
-/* public Farmacia()
-        {
-            Localizacaos = new HashSet<Localizacao>();
-        }
-*/
         [Column("id")]
         public int Id {get;set;}
         [Column("nome")]
@@ -29,7 +24,6 @@ namespace Api_Farmacias.Model
         public DateTime HoraDeabertura{get;set;}
         [Column("horadeencerramento")]
         public DateTime HoraDeEncerramento{get;set;}
-   
-
+        public ICollection<Localizacao>? Localizacoes { get; set; }
     }
 }

@@ -1,6 +1,9 @@
+using Api_Farmacias.DTO;
 using Api_Farmacias.Model;
 using Api_Farmancias.Database;
+using Api_Farmancias.Model;
 using Api_Farmancias.Repositorio.InterFace;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -9,56 +12,83 @@ namespace Api_Farmancias.Repositorio
     public class FarmaciaRepository : IFarmaciaRepisitory
     {
         private readonly Appdbcontext _conexao;
-        public FarmaciaRepository(Appdbcontext conexaoDB)
+        private readonly IMapper _mapper;
+
+
+        public FarmaciaRepository(Appdbcontext conexaoDB,IMapper mapper)
         {
             _conexao = conexaoDB;
+            _mapper= mapper;
+
         }
 
-       public async Task<List<Farmacia>> Farmancias()
+       public async Task<List<FarmaciaDTO>> Farmancias()
         {
-            return await _conexao.farmancias.ToListAsync();
+            var ListFArm =await _conexao.farmancias.ToListAsync();
+            var farmDTO =_mapper.Map<List<FarmaciaDTO>>(ListFArm);
+            return farmDTO;
         }
-        public async Task<Farmacia> BuscarFarmacia(int id)
+        public async Task<FarmaciaDTO> BuscarFarmacia(int id)
         {
-            return await _conexao.farmancias.FirstOrDefaultAsync(x => x.Id == id);
+            var farmacia = await _conexao.farmancias
+            .Include(f=>f.Localizacoes)
+            .Where(x => x.Id == id)
+            .FirstOrDefaultAsync();
+            var farmDTO = _mapper.Map<FarmaciaDTO>(farmacia);
+            return farmDTO ;
         }
-        public async Task<Farmacia> AdicionarFarmacia(Farmacia farmacia)
+
+        public async Task<Farmacia> AdicionarFarmacia(FarmaciaDTO farmacia)
         {
-            await _conexao.farmancias.AddAsync(farmacia);
+            var farmDTO =_mapper.Map<Farmacia>(farmacia);
+            
+            await _conexao.farmancias.AddAsync(farmDTO);
             await _conexao.SaveChangesAsync();
-            return farmacia;
+
+            if (farmacia.Localizacao != null)
+            {
+                var localizacao = _mapper.Map<Localizacao>(farmacia.Localizacao);
+
+                // Use o Id da farmácia ao adicionar a localização
+                localizacao.Id_farmacia = farmDTO.Id;
+
+                await _conexao.localizacaos.AddAsync(localizacao);
+                await _conexao.SaveChangesAsync();
+        
+            }
+
+            return farmDTO;
         }
-        public async Task<Farmacia> Atualizar(Farmacia farmacia, int id)
+        
+
+       public async Task<Farmacia> Atualizar(FarmaciaDTO farmacia, int id)
         {
-            Farmacia farmaciaid = await BuscarFarmacia(id);
+            var farmaciaid = await BuscarFarmacia(id);
             if(farmaciaid == null)
             {
                 throw new Exception($"Farmacia para o ID:{id} nao encontrado.");
             }
 
-            farmaciaid.Nome = farmacia.Nome;
-            farmacia.Email=farmacia.Email;
-            
-
-            _conexao.farmancias.Update(farmaciaid);
+            var farmDTO = _mapper.Map<Farmacia>(farmaciaid);
+            _conexao.farmancias.Update(farmDTO);
             await _conexao.SaveChangesAsync();
 
-            return farmaciaid;
+            return farmDTO;
         }
 
         public async Task<bool> Apagar(int id)
         {
-            Farmacia farmaciaid = await BuscarFarmacia(id);
+            var farmaciaid = await BuscarFarmacia(id);
             if(farmaciaid == null)
             {
                 throw new Exception($"Farmacia para o ID:{id} nao encontrado.");
             }
+            var farmDTO =_mapper.Map<Farmacia>(farmaciaid);
 
-            _conexao.farmancias.Remove(farmaciaid);
+            _conexao.farmancias.Remove(farmDTO);
             await _conexao.SaveChangesAsync();
             return true;
         }
 
-    
     }
 }
