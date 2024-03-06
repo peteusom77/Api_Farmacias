@@ -1,6 +1,4 @@
 using Api_Farmacias.Model;
-using Api_Farmancias.Model;
-
 namespace Api_Farmancias.Repositorio.InterFace
 {
     public interface IFarmaciaRepisitory

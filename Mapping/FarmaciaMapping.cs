@@ -15,10 +15,10 @@ namespace Api_Farmacias.Mapping
         {
             CreateMap<Farmacia, FarmaciaDTO>()
             .ReverseMap()
-            .ForMember(dest => dest.Localizacoes, opt => opt.MapFrom(src => src.Localizacao))
             .ForMember(dest => dest.Id, opt => opt.Ignore());
             CreateMap<FarmaciaDTO,Farmacia>();
-            CreateMap<Localizacao, LocalizacaoDTO>().ReverseMap();
+            CreateMap<Localizacao,LocalizacaoDTO>()
+            .ReverseMap();
         }
     }
 }

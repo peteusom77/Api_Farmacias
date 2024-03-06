@@ -10,8 +10,10 @@ namespace Api_Farmancias.Database
 {
     public class Appdbcontext:DbContext
     {
+        
         public DbSet<Farmacia> farmancias{get;set;}
         public DbSet<Localizacao> localizacaos{get;set;}
+        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

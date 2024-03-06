@@ -1,7 +1,6 @@
 using Api_Farmacias.DTO;
 using Api_Farmacias.Model;
 using Api_Farmancias.Database;
-using Api_Farmancias.Model;
 using Api_Farmancias.Repositorio.InterFace;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -24,16 +23,13 @@ namespace Api_Farmancias.Repositorio
 
        public async Task<List<FarmaciaDTO>> Farmancias()
         {
-            var ListFArm =await _conexao.farmancias.ToListAsync();
+            var ListFArm = await _conexao.farmancias.ToListAsync();
             var farmDTO =_mapper.Map<List<FarmaciaDTO>>(ListFArm);
             return farmDTO;
         }
         public async Task<FarmaciaDTO> BuscarFarmacia(int id)
         {
-            var farmacia = await _conexao.farmancias
-            .Include(f=>f.Localizacoes)
-            .Where(x => x.Id == id)
-            .FirstOrDefaultAsync();
+            var farmacia = await _conexao.farmancias.Where(x => x.Id == id).FirstOrDefaultAsync();
             var farmDTO = _mapper.Map<FarmaciaDTO>(farmacia);
             return farmDTO ;
         }
@@ -41,25 +37,10 @@ namespace Api_Farmancias.Repositorio
         public async Task<Farmacia> AdicionarFarmacia(FarmaciaDTO farmacia)
         {
             var farmDTO =_mapper.Map<Farmacia>(farmacia);
-            
             await _conexao.farmancias.AddAsync(farmDTO);
             await _conexao.SaveChangesAsync();
-
-            if (farmacia.Localizacao != null)
-            {
-                var localizacao = _mapper.Map<Localizacao>(farmacia.Localizacao);
-
-                // Use o Id da farmácia ao adicionar a localização
-                localizacao.Id_farmacia = farmDTO.Id;
-
-                await _conexao.localizacaos.AddAsync(localizacao);
-                await _conexao.SaveChangesAsync();
-        
-            }
-
             return farmDTO;
         }
-        
 
        public async Task<Farmacia> Atualizar(FarmaciaDTO farmacia, int id)
         {

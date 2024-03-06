@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Api_Farmacias.Model;
+using Api_Farmacias.Repositorio;
+using Api_Farmacias.Repositorio.Interface;
+using Api_Farmancias.Model;
 using Api_Farmancias.Repositorio.InterFace;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -16,15 +17,21 @@ namespace Api_Farmacias.Controllers
     public class FarmaciaControllers:ControllerBase
     {
         protected readonly IFarmaciaRepisitory _farmfonte;
+        protected readonly ILocalizacaoRepository _locali;
+        protected readonly IDirecaoRepository _direcao;
+        protected readonly IN_TelefoneRepository _ntele;
         private readonly IMapper _mapper;
-        public FarmaciaControllers(IFarmaciaRepisitory farmfonte,IMapper mapper)
+        public FarmaciaControllers(IFarmaciaRepisitory farmfonte,IMapper mapper,ILocalizacaoRepository localizacaoRepository,IDirecaoRepository direcaoRepository,IN_TelefoneRepository n_TelefoneRepository)
         {
             _farmfonte=farmfonte;
             _mapper=mapper;
+            _direcao =direcaoRepository;
+            _locali =localizacaoRepository;
+            _ntele = n_TelefoneRepository;
         }
 
         [HttpGet("ListarFarmacias")]
-        public async Task<ActionResult<List<FarmaciaDTO>>> BuscartodasFarmacia()
+        public async Task<ActionResult<List<Farmacia>>> BuscartodasFarmacia()
         {
             List<FarmaciaDTO> farmacias = await _farmfonte.Farmancias();
             return Ok(farmacias);
@@ -39,18 +46,35 @@ namespace Api_Farmacias.Controllers
 
         [HttpPost]
         [Route("adicionarFarmacia")]
-        public async Task<ActionResult<Farmacia>>Adicionarfarm([FromBody] FarmaciaDTO farmacia)
+        public async Task<ActionResult<Farmacia>>Adicionarfarm([FromBody] Todos todos)
         {
-            Farmacia farmacias = await _farmfonte.AdicionarFarmacia(farmacia);
-            var options = new JsonSerializerOptions
-    {
-        ReferenceHandler = ReferenceHandler.Preserve
-    };
-
-    string json = JsonSerializer.Serialize(farmacias, options);
-
-    return Ok(json);
+            Farmacia farmacias = await _farmfonte.AdicionarFarmacia(todos.farmaciaDTO);
+            todos.localizacaoDTO.farmacia_id = farmacias.Id;
+            Localizacao localizacao = await _locali.AdicionarLocali(todos.localizacaoDTO);
+            return Ok(new { Farmacia = farmacias, Localizacao = localizacao });
         }
+        [HttpPost("AdicionarLocalizacao/{id_farm}")]
+        public async Task<ActionResult<Localizacao>> AdicionarLocalizacao([FromBody] LocalizacaoDTO locali, int id_farm)
+        {
+            try
+            {
+                var farmacia = await _farmfonte.BuscarFarmacia(id_farm);
+                if (farmacia == null)
+                {
+                    return NotFound($"Farmácia com ID {id_farm} não encontrada.");
+                }
+
+                locali.farmacia_id = farmacia.Id;
+                var localizacao = await _locali.AdicionarLocali(locali);
+
+                return Ok(localizacao);
+            }
+            catch (Exception ex)
+            {
+                 // Lide com a exceção de maneira apropriada, log ou retorne um erro HTTP 500, se necessário.
+                return StatusCode(500, $"Erro ao adicionar localização: {ex.Message}");
+            }
+}
 
         [HttpPut("AtualizarFarmacia{id:int}")]
         public async Task<ActionResult<Farmacia>> Atualiza([FromBody] FarmaciaDTO farmacia1, int id)
