@@ -1,22 +1,13 @@
-using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-using Api_Farmacias.Model;
+using System.Text.Json.Serialization;
 using Api_Farmancias.Model;
-using Microsoft.VisualBasic;
-
 namespace Api_Farmacias.Model
 {
     [Table("farmacia")]
     public class Farmacia
     {
-/* public Farmacia()
-        {
-            Localizacaos = new HashSet<Localizacao>();
-        }
-*/
+        [Key]
         [Column("id")]
         public int Id {get;set;}
         [Column("nome")]
@@ -29,7 +20,11 @@ namespace Api_Farmacias.Model
         public DateTime HoraDeabertura{get;set;}
         [Column("horadeencerramento")]
         public DateTime HoraDeEncerramento{get;set;}
-   
-
+        [JsonIgnore]
+        public List<Localizacao>? localizacaos{get;set;}
+        [JsonIgnore]
+        public List<Direcao>? direcaos{get;set;}
+        [JsonIgnore]
+        public List<N_telefone>? n_Telefones{get;set;}
     }
 }
