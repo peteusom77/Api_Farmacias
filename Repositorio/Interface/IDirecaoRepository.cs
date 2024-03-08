@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Api_Farmancias.Model;
-
+using Api_Farmacias.Model;
 namespace Api_Farmacias.Repositorio.Interface
 {
     public interface IDirecaoRepository

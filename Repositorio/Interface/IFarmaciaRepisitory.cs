@@ -1,14 +1,13 @@
 using Api_Farmacias.Model;
-
-namespace Api_Farmancias.Repositorio.InterFace
+namespace Api_Farmacias.Repositorio.InterFace
 {
     public interface IFarmaciaRepisitory
     {
-         Task<List<Farmacia>> Farmancias();
-         Task<Farmacia> BuscarFarmacia(int id);
-        Task<Farmacia> AdicionarFarmacia(Farmacia farmancia);
-        Task <Farmacia> Atualizar(Farmacia farmancia, int id);
-         Task<bool> Apagar(int id);
-         
+         Task<List<FarmaciaDTO>> Farmancias();
+         Task<FarmaciaDTO> BuscarFarmacia(int id);
+        Task<Farmacia> AdicionarFarmacia(FarmaciaDTO farmancia);
+        Task <Farmacia> Atualizar(FarmaciaDTO farmancia, int id);
+        Task<bool> Apagar(int id);
+
     }
 }

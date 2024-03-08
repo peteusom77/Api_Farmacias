@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Api_Farmacias.Model;
-using Api_Farmancias.Repositorio.InterFace;
+using Api_Farmacias.Repositorio.Interface;
+using Api_Farmacias.Repositorio.InterFace;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-
 namespace Api_Farmacias.Controllers
 {
     [ApiController]
@@ -13,22 +10,30 @@ namespace Api_Farmacias.Controllers
     public class FarmaciaControllers:ControllerBase
     {
         protected readonly IFarmaciaRepisitory _farmfonte;
-        public FarmaciaControllers(IFarmaciaRepisitory farmfonte)
+        protected readonly ILocalizacaoRepository _locali;
+        protected readonly IDirecaoRepository _direcao;
+        protected readonly IN_TelefoneRepository _ntele;
+        private readonly IMapper _mapper;
+        public FarmaciaControllers(IFarmaciaRepisitory farmfonte,IMapper mapper,ILocalizacaoRepository localizacaoRepository,IDirecaoRepository direcaoRepository,IN_TelefoneRepository n_TelefoneRepository)
         {
             _farmfonte=farmfonte;
+            _mapper=mapper;
+            _direcao =direcaoRepository;
+            _locali =localizacaoRepository;
+            _ntele = n_TelefoneRepository;
         }
 
-        [HttpGet]
+        [HttpGet("ListarFarmacias")]
         public async Task<ActionResult<List<Farmacia>>> BuscartodasFarmacia()
         {
-            List<Farmacia> farmacias = await _farmfonte.Farmancias();
+            List<FarmaciaDTO> farmacias = await _farmfonte.Farmancias();
             return Ok(farmacias);
         }
         
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Farmacia>> Buscarfarmacia(int id)
+        [HttpGet("BuscarFarmacia{id}")]
+        public async Task<ActionResult<FarmaciaDTO>> Buscarfarmacia(int id)
         {
-            Farmacia farmacias = await _farmfonte.BuscarFarmacia(id);
+            FarmaciaDTO farmacias = await _farmfonte.BuscarFarmacia(id);
             return Ok(farmacias);
         }
 
@@ -64,19 +69,14 @@ namespace Api_Farmacias.Controllers
             }
 }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Farmacia>> Atualiza([FromBody] Farmacia farmacia1, int id)
+        [HttpPut("AtualizarFarmacia{id:int}")]
+        public async Task<ActionResult<Farmacia>> Atualiza([FromBody] FarmaciaDTO farmacia1, int id)
         {
-            farmacia1.Id = id;
-            Farmacia farmacia = await _farmfonte.Atualizar(farmacia1, id);
+            farmacia1.Id = id; 
+            var farmacia = await _farmfonte.Atualizar(farmacia1, id);
             return Ok(farmacia);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Farmacia>> Deletar(int id)
-        {
-            bool apagado = await _farmfonte.Apagar(id);
-            return Ok(apagado); 
-        }
+    
     }
 }

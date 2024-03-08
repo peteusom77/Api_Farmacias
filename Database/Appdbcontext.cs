@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Api_Farmacias.Model;
-using Api_Farmancias.Model;
 using Microsoft.EntityFrameworkCore;
-
-namespace Api_Farmancias.Database
+namespace Api_Farmacias.Database
 {
     public class Appdbcontext:DbContext
     {
-        public DbSet<Farmacia> farmancias{get;set;}
+        
+        public DbSet<Farmacia> farmacias{get;set;}
         public DbSet<Localizacao> localizacaos{get;set;}
+        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
