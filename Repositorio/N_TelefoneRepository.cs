@@ -28,6 +28,7 @@ namespace Api_Farmacias.Repositorio
             await _conexao.AddAsync(fm);
             await _conexao.SaveChangesAsync();
             return fm;
+    
         }
 
         public Task<N_telefone> AtualizarN_telefone(N_telefoneDTO n_Telefone, int id)

@@ -4,6 +4,7 @@ namespace Api_Farmacias.Model
 {
     [Table("localizacao")]
     
+    
     public class Localizacao
     {
         [Key]
