@@ -9,13 +9,12 @@ namespace Api_Farmacias.Mapping
     {
         public FarmaciaMapping()
         {
-            CreateMap<Farmacia, FarmaciaDTO>()
-            .ReverseMap()
+            CreateMap<Farmacia, FarmaciaDTO>() .ReverseMap()
             .ForMember(dest => dest.Id, opt => opt.Ignore());
             CreateMap<FarmaciaDTO,Farmacia>();
+            CreateMap<DirecaoDTO,Direcao>().ReverseMap();
             CreateMap<N_telefoneDTO,N_telefone>().ReverseMap();
-            CreateMap<Localizacao,LocalizacaoDTO>()
-            .ReverseMap();
+            CreateMap<Localizacao,LocalizacaoDTO>().ReverseMap();
         }
     }
 }
