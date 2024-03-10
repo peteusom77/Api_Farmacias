@@ -7,7 +7,8 @@ namespace Api_Farmacias.Database
         
         public DbSet<Farmacia> farmacias{get;set;}
         public DbSet<Localizacao> localizacaos{get;set;}
-        
+        public DbSet<N_telefone> n_Telefones{get;set;}
+        public DbSet<Direcao> direcaos{get;set;}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

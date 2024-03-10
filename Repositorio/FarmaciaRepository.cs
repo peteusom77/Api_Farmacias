@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Api_Farmancias.Repositorio
 {
-    public class FarmaciaRepository : IFarmaciaRepisitory
+    public class FarmaciaRepository : IFarmaciaRepository
     {
         private readonly Appdbcontext _conexao;
         private readonly IMapper _mapper;

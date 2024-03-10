@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Api_Farmacias.DTO;
 using Api_Farmacias.Model;
-using Api_Farmancias.Model;
 using AutoMapper;
+
 
 namespace Api_Farmacias.Mapping
 {
@@ -17,9 +13,9 @@ namespace Api_Farmacias.Mapping
             .ReverseMap()
             .ForMember(dest => dest.Id, opt => opt.Ignore());
             CreateMap<FarmaciaDTO,Farmacia>();
+            CreateMap<N_telefoneDTO,N_telefone>().ReverseMap();
             CreateMap<Localizacao,LocalizacaoDTO>()
             .ReverseMap();
         }
     }
 }
-

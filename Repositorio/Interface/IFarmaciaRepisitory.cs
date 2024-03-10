@@ -1,7 +1,7 @@
 using Api_Farmacias.Model;
 namespace Api_Farmacias.Repositorio.InterFace
 {
-    public interface IFarmaciaRepisitory
+    public interface IFarmaciaRepository
     {
          Task<List<FarmaciaDTO>> Farmacias();
          Task<FarmaciaDTO> BuscarFarmacia(int id);
