@@ -4,5 +4,6 @@ namespace Api_Farmacias.DTO
     {
        
         public int telefone {get;set;}   
+        public int farmacia_id{get;set;}
     }
 }
