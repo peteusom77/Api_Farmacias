@@ -26,7 +26,7 @@ namespace Api_Farmacias.Controllers
         [HttpGet("ListarFarmacias")]
         public async Task<ActionResult<List<Farmacia>>> BuscartodasFarmacia()
         {
-            List<FarmaciaDTO> farmacias = await _farmfonte.Farmancias();
+            List<FarmaciaDTO> farmacias = await _farmfonte.Farmacias();
             return Ok(farmacias);
         }
         

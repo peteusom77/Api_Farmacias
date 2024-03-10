@@ -20,7 +20,7 @@ namespace Api_Farmancias.Repositorio
 
         }
 
-       public async Task<List<FarmaciaDTO>> Farmancias()
+       public async Task<List<FarmaciaDTO>> Farmacias()
         {
             var ListFArm = await _conexao.farmacias.ToListAsync();
             var farmDTO =_mapper.Map<List<FarmaciaDTO>>(ListFArm);

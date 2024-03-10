@@ -1,4 +1,4 @@
-namespace Api_Farmancias.Model
+namespace Api_Farmacias.Model
 {
     public class DirecaoDTO
     {
