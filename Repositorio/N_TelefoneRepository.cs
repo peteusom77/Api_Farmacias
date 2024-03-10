@@ -31,9 +31,17 @@ namespace Api_Farmacias.Repositorio
     
         }
 
-        public Task<N_telefone> AtualizarN_telefone(N_telefoneDTO n_Telefone, int id)
+        public async Task<N_telefone> AtualizarN_telefone(N_telefoneDTO n_Telefone, int id)
         {
-            throw new NotImplementedException();
+             var n_teleid = BuscarN_telefone(id);
+              if(n_teleid == null)
+                {
+                    throw new Exception($"O id:{id} não existe.");
+                }
+                var n_teleDto=_mapper.Map<N_telefone>(n_teleid);
+                _conexao.n_Telefones.Update(n_teleDto);
+                await _conexao.SaveChangesAsync();
+                return n_teleDto;
         }
     }
 }
