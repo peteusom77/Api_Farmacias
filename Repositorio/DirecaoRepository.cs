@@ -22,18 +22,18 @@ namespace Api_Farmacias.Repositorio
                 return dir;
             }
         
-            public Task<Direcao> AdicionsrDirecao(DirecaoDTO direcao)
+            public async Task<Direcao> AdicionsrDirecao(DirecaoDTO direcao)
             {
                 var farm = _mapper.Map<Direcao>(direcao);
                 await _conexao.AddAsync(farm);
                 await _conexao.SaveChangesAsync();
-                return farm
+                return farm;
             }
 
-            public Task<Direcao> AtualizarDirecao(DirecaoDTO direcao,int id)
+            public async Task<Direcao> AtualizarDirecao(DirecaoDTO direcao,int id)
             {
                 var farm = _mapper.Map<Direcao>(direcao);
-                await _conexao.Update(farm);
+                _conexao.Update(farm);
                 await _conexao.SaveChangesAsync();
                 return farm;
             }
