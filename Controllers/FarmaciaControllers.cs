@@ -3,30 +3,31 @@ using Api_Farmacias.Repositorio.Interface;
 using Api_Farmacias.Repositorio.InterFace;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+
 namespace Api_Farmacias.Controllers
 {
     [ApiController]
     [Route("Api/[controller]")]
     public class FarmaciaControllers:ControllerBase
     {
-        protected readonly IFarmaciaRepisitory _farmfonte;
+        protected readonly IFarmaciaRepository _farmfonte;
         protected readonly ILocalizacaoRepository _locali;
         protected readonly IDirecaoRepository _direcao;
         protected readonly IN_TelefoneRepository _ntele;
         private readonly IMapper _mapper;
-        public FarmaciaControllers(IFarmaciaRepisitory farmfonte,IMapper mapper,ILocalizacaoRepository localizacaoRepository,IDirecaoRepository direcaoRepository,IN_TelefoneRepository n_TelefoneRepository)
+        public FarmaciaControllers(IFarmaciaRepository farmfonte,IMapper mapper,ILocalizacaoRepository localizacaoRepository,IDirecaoRepository direcaoRepository,IN_TelefoneRepository n_TelefoneRepository)
         {
             _farmfonte=farmfonte;
             _mapper=mapper;
             _direcao =direcaoRepository;
             _locali =localizacaoRepository;
             _ntele = n_TelefoneRepository;
-        }
+        }//Injeção de dependecias
 
         [HttpGet("ListarFarmacias")]
         public async Task<ActionResult<List<Farmacia>>> BuscartodasFarmacia()
         {
-            List<FarmaciaDTO> farmacias = await _farmfonte.Farmancias();
+            List<FarmaciaDTO> farmacias = await _farmfonte.Farmacias();
             return Ok(farmacias);
         }
         
@@ -42,10 +43,19 @@ namespace Api_Farmacias.Controllers
         public async Task<ActionResult<Farmacia>>Adicionarfarm([FromBody] Todos todos)
         {
             Farmacia farmacias = await _farmfonte.AdicionarFarmacia(todos.farmaciaDTO);
-            todos.localizacaoDTO.farmacia_id = farmacias.Id;
+            
+            todos.localizacaoDTO.farmacia_id = farmacias.Id;//para o atributo id farmacia receber o id fda farmacia criada
             Localizacao localizacao = await _locali.AdicionarLocali(todos.localizacaoDTO);
-            return Ok(new { Farmacia = farmacias, Localizacao = localizacao });
+           
+           
+            
+            todos.n_TelefoneDTO.farmacia_id =farmacias.Id;
+            N_telefone n_Telefone = await _ntele.AdicionarN_telefone(todos.n_TelefoneDTO);
+           
+            
+            return Ok(new { Farmacia = farmacias, Localizacao = localizacao,  n_Telefone = n_Telefone});
         }
+        
         [HttpPost("AdicionarLocalizacao/{id_farm}")]
         public async Task<ActionResult<Localizacao>> AdicionarLocalizacao([FromBody] LocalizacaoDTO locali, int id_farm)
         {
@@ -76,6 +86,9 @@ namespace Api_Farmacias.Controllers
             var farmacia = await _farmfonte.Atualizar(farmacia1, id);
             return Ok(farmacia);
         }
+
+
+
 
     
     }

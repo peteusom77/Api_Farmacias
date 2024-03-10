@@ -2745,23 +2745,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\peteusom\\.nuget\\packages\\": {},
+    "C:\\Users\\Lenovo\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\peteusom\\Desktop\\Estudos\\programacaoGeral\\exercicios c#\\Api_Farmacias\\Api_Farmacias.csproj",
+      "projectUniqueName": "c:\\Users\\Lenovo\\Desktop\\Api_Farmacias\\Api_Farmacias.csproj",
       "projectName": "Api_Farmacias",
-      "projectPath": "C:\\Users\\peteusom\\Desktop\\Estudos\\programacaoGeral\\exercicios c#\\Api_Farmacias\\Api_Farmacias.csproj",
-      "packagesPath": "C:\\Users\\peteusom\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\peteusom\\Desktop\\Estudos\\programacaoGeral\\exercicios c#\\Api_Farmacias\\obj\\",
+      "projectPath": "c:\\Users\\Lenovo\\Desktop\\Api_Farmacias\\Api_Farmacias.csproj",
+      "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\Lenovo\\Desktop\\Api_Farmacias\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\peteusom\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2783,6 +2783,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -2837,7 +2842,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
