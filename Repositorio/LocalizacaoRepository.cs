@@ -27,7 +27,7 @@ namespace Api_Farmacias.Repositorio
             return farm;
         }
 
-        public Task<Localizacao> Atualizar(Localizacao localizacao, int id)
+        public Task<Localizacao> Atualizar(LocalizacaoDTO localizacao, int id)
         {
             throw new NotImplementedException();
         }
