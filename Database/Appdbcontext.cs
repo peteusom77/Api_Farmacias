@@ -18,7 +18,7 @@ namespace Api_Farmancias.Database
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //sua palavra password essa n é a minha kkkk
-            optionsBuilder.UseNpgsql(connectionString:"Host=localhost;Username=postgres;password=pepetela123;database=Farmacias");
+            optionsBuilder.UseNpgsql(connectionString:"Host=localhost;Username=postgres;password=;database=Farmacias");
         }
 
        
