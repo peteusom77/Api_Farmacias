@@ -3,7 +3,8 @@ namespace Api_Farmacias.Repositorio.Interface
 {
     public interface IDirecaoRepository
     {
-        Task<Direcao> AdicionsrDirecao(Direcao direcao);
-        Task<Direcao> AtualizarDirecao(Direcao direcao,int id);
+        Task<Farmacia> BuscarDirecaoPorId(int id);
+        Task<Direcao> AdicionsrDirecao(DirecaoDTO direcao);
+        Task<Direcao> AtualizarDirecao(DirecaoDTO direcao,int id);
     }
 }
