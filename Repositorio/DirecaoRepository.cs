@@ -10,10 +10,12 @@ namespace Api_Farmacias.Repositorio
     {
         private readonly Appdbcontext _conexao;
         private readonly IMapper _mapper;
-        public DirecaoRepository(Appdbcontext appdbcontext)
+        public DirecaoRepository(Appdbcontext appdbcontext, IMapper mapper)
         {
             _conexao = appdbcontext;
+            _mapper= mapper;
 
+        }
             public async Task<Farmacia> BuscarDirecaoPorId(int id)
             {
                 var dir = await _conexao.farmacias.FirstOrDefaultAsync(f => f.Id == id);
@@ -35,6 +37,6 @@ namespace Api_Farmacias.Repositorio
                 await _conexao.SaveChangesAsync();
                 return farm;
             }
-        }
+        
     }
 }
