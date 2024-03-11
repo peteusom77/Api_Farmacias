@@ -3,6 +3,7 @@ using Api_Farmacias.Repositorio.Interface;
 using Api_Farmacias.Database;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+
 namespace Api_Farmacias.Repositorio
 {
     public class LocalizacaoRepository : ILocalizacaoRepository
@@ -14,11 +15,7 @@ namespace Api_Farmacias.Repositorio
             _conexao =appdbcontext;
             _mapper =mapper;
         }
-        public async Task<Farmacia> BuscarLocalPorId(int id_farm)
-        {
-            var lo = await _conexao.farmacias.FirstOrDefaultAsync(f => f.Id == id_farm);
-            return lo;
-        }
+      
         public async Task<Localizacao> AdicionarLocali(LocalizacaoDTO localizacao)
         {
             var farm = _mapper.Map<Localizacao>(localizacao);
@@ -27,9 +24,21 @@ namespace Api_Farmacias.Repositorio
             return farm;
         }
 
-        public Task<Localizacao> Atualizar(Localizacao localizacao, int id)
+        public async Task<Localizacao> Atualizar(LocalizacaoDTO Listlocalizacao, int farm_id)
+        {
+            
+        }
+
+        public Task Atualizar(Localizacao localizacao, int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<LocalizacaoDTO>> localzacoes(int farm_id)
+        {
+            var lo = await _conexao.localizacaos.Where(x=>x.farmacia_id == farm_id).ToListAsync();
+            var loDTO = _mapper.Map<List<LocalizacaoDTO>>(lo);
+            return loDTO;
         }
     }
 }

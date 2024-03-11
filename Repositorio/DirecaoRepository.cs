@@ -9,6 +9,7 @@ namespace Api_Farmacias.Repositorio
     public class DirecaoRepository : IDirecaoRepository
     {
         private readonly Appdbcontext _conexao;
+        
         private readonly IMapper _mapper;
         public DirecaoRepository(Appdbcontext appdbcontext, IMapper mapper)
         {

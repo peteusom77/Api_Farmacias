@@ -16,5 +16,7 @@ namespace Api_Farmacias.Model
         public DateTime HoraDeabertura{get;set;}
   
         public DateTime HoraDeEncerramento{get;set;}
+
+        
     }
 }

@@ -79,10 +79,15 @@ namespace Api_Farmacias.Controllers
         }
         
         [HttpGet("BuscarFarmacia{id}")]
-        public async Task<ActionResult<FarmaciaDTO>> Buscarfarmacia(int id)
+        public async Task<ActionResult<object>> Buscarfarmacia(int id)
         {
-            FarmaciaDTO farmacias = await _farmfonte.BuscarFarmacia(id);
-            return Ok(farmacias);
+            Farmacia farmacias = await _farmfonte.BuscarFarmacia(id);
+            if(farmacias ==null)
+            {
+                return NotFound();
+            }
+            List<LocalizacaoDTO> localizacaos= await _locali.localzacoes(id);            
+            return Ok(new{Farmacia =farmacias,Localizacao =localizacaos});
         }
     }
 }

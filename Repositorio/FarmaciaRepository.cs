@@ -1,5 +1,6 @@
 using Api_Farmacias.Database;
 using Api_Farmacias.Model;
+using Api_Farmacias.Repositorio.Interface;
 using Api_Farmacias.Repositorio.InterFace;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -9,13 +10,15 @@ namespace Api_Farmancias.Repositorio
 {
     public class FarmaciaRepository : IFarmaciaRepository
     {
+        protected readonly ILocalizacaoRepository _locali;
         private readonly Appdbcontext _conexao;
         private readonly IMapper _mapper;
 
 
-        public FarmaciaRepository(Appdbcontext conexaoDB,IMapper mapper)
+        public FarmaciaRepository(Appdbcontext conexaoDB,IMapper mapper,ILocalizacaoRepository localizacaoRepository)
         {
             _conexao = conexaoDB;
+            _locali =localizacaoRepository;
             _mapper= mapper;
 
         }
@@ -26,10 +29,11 @@ namespace Api_Farmancias.Repositorio
             var farmDTO =_mapper.Map<List<FarmaciaDTO>>(ListFArm);
             return farmDTO;
         }
-        public async Task<FarmaciaDTO> BuscarFarmacia(int id)
+        public async Task<Farmacia> BuscarFarmacia(int id)
         {
             var farmacia = await _conexao.farmacias.Where(x => x.Id == id).FirstOrDefaultAsync();
-            var farmDTO = _mapper.Map<FarmaciaDTO>(farmacia);
+            
+            var farmDTO = _mapper.Map<Farmacia>(farmacia);
             return farmDTO ;
         }
 
