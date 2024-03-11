@@ -43,5 +43,12 @@ namespace Api_Farmacias.Repositorio
                 await _conexao.SaveChangesAsync();
                 return n_teleDto;
         }
+
+        public async Task<List<N_telefoneDTO>> telefones(int id_farm)
+        {
+            var lo =await _conexao.n_Telefones.Where(x=>x.farmacia_id == id_farm).ToListAsync();
+            var ll =  _mapper.Map<List<N_telefoneDTO>>(lo);
+            return ll;
+        }
     }
 }

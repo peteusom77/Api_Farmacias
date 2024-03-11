@@ -1,3 +1,4 @@
+using Api_Farmacias.DTO;
 using Api_Farmacias.Model;
 using Api_Farmacias.Repositorio.Interface;
 using Api_Farmacias.Repositorio.InterFace;
@@ -56,26 +57,35 @@ namespace Api_Farmacias.Controllers
             }
             catch (Exception ex)
             {
-                 // Lide com a exceção de maneira apropriada, log ou retorne um erro HTTP 500, se necessário.
+                // Lide com a exceção de maneira apropriada, log ou retorne um erro HTTP 500, se necessário.
                 return StatusCode(500, $"Erro ao adicionar localização: {ex.Message}");
             }
         }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////AndPoinst do tipo Put ⬇️
-        [HttpPut("AtualizarFarmacia{id:int}")]
-        public async Task<ActionResult<Farmacia>> Atualiza([FromBody] FarmaciaDTO farmacia1, int id)
-        {
-            farmacia1.Id = id; 
-            var farmacia = await _farmfonte.Atualizar(farmacia1, id);
-            return Ok(farmacia);
-        }
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////AndPoinst do tipo Get ⬇️
         [HttpGet("ListarFarmacias")]
-        public async Task<ActionResult<List<Farmacia>>> BuscartodasFarmacia()
+        public async Task<ActionResult<List<Todos_Get>>> BuscartodasFarmacia()
         {
-            List<FarmaciaDTO> farmacias = await _farmfonte.Farmacias();
-            return Ok(farmacias);
+            List<FarmaciaDTO> farmaciaDTOs = await _farmfonte.Farmacias();
+            List<Todos_Get> todos_GetsLIST= new List<Todos_Get>();
+            foreach (var farmacia in farmaciaDTOs)
+            {
+                List<LocalizacaoDTO> localizacaos =await _locali.localzacoes(farmacia.Id);
+                List<DirecaoDTO> direcaoDTOs = await _direcao.direcoes(farmacia.Id);
+                List<N_telefoneDTO> n_TelefoneDTOs = await _ntele.telefones(farmacia.Id);
+                todos_GetsLIST.Add(new Todos_Get {
+                    NN_TelefoneDTOs =n_TelefoneDTOs,
+                    FFarmaciaDTO =farmacia,
+                    LLocalizacaos =localizacaos,
+                    DDirecaoDTOs =direcaoDTOs
+                });
+            
+            }
+            return Ok(todos_GetsLIST);
+            
         }
         
         [HttpGet("BuscarFarmacia{id}")]

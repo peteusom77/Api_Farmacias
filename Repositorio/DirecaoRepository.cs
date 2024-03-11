@@ -49,14 +49,19 @@ namespace Api_Farmacias.Repositorio
             {
                 throw new Exception($"O id:{id} não existe.");
             }
-          var direcaoDto =_mapper.Map<Direcao>(direcaoid);
-          _conexao.direcaos.Remove(direcaoDto);
-          await _conexao.SaveChangesAsync();
+            var direcaoDto =_mapper.Map<Direcao>(direcaoid);
+            _conexao.direcaos.Remove(direcaoDto);
+            await _conexao.SaveChangesAsync();
 
-        return true;
+            return true;
 
         }
 
-        
+        public async Task<List<DirecaoDTO>> direcoes(int id_farm)
+        {
+            var lo = await _conexao.direcaos.Where(x=>x.farmacia_id==id_farm).ToListAsync();
+            var ll = _mapper.Map<List<DirecaoDTO>>(lo);
+            return ll;
+        }
     }
 }
