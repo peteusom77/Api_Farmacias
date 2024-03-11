@@ -3,6 +3,7 @@ using Api_Farmacias.Repositorio.Interface;
 using Api_Farmacias.Database;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+
 namespace Api_Farmacias.Repositorio
 {
     public class LocalizacaoRepository : ILocalizacaoRepository
@@ -57,6 +58,11 @@ namespace Api_Farmacias.Repositorio
 
         }
 
-        
+        public async Task<List<LocalizacaoDTO>> localzacoes(int farm_id)
+        {
+            var lo = await _conexao.localizacaos.Where(x=>x.farmacia_id == farm_id).ToListAsync();
+            var loDTO = _mapper.Map<List<LocalizacaoDTO>>(lo);
+            return loDTO;
+        }
     }
 }
