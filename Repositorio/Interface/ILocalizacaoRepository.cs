@@ -6,9 +6,8 @@ namespace Api_Farmacias.Repositorio.Interface
     {
         Task<Localizacao> AdicionarLocali(LocalizacaoDTO localizacao);
         Task<List<LocalizacaoDTO>> localzacoes(int farm_id);
-        Task<Localizacao> AtualizarLocal(Localizacao localizacao,int id);
-        Task<Farmacia> BuscarLocalPorId(int id);
+        Task<Localizacao> AtualizarLocal(LocalizacaoDTO localizacao,int id);
+        Task<Localizacao> BuscarLocalPorId(int id);
         Task<bool> ApagarLocal(int id);
-        
     }
 }

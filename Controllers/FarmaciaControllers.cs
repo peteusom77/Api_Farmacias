@@ -22,7 +22,8 @@ namespace Api_Farmacias.Controllers
             _locali =localizacaoRepository;
             _ntele = n_TelefoneRepository;
         }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////AndPoinst do tipo Post ⬇️
         [HttpPost]
         [Route("adicionarFarmacia")]
@@ -91,13 +92,25 @@ namespace Api_Farmacias.Controllers
         [HttpGet("BuscarFarmacia{id}")]
         public async Task<ActionResult<object>> Buscarfarmacia(int id)
         {
-            FarmaciaDTO farmacias = await _farmfonte.BuscarFarmacia(id);
+            Farmacia farmacias = await _farmfonte.BuscarFarmacia(id);
             if(farmacias ==null)
             {
                 return NotFound();
             }
             List<LocalizacaoDTO> localizacaos= await _locali.localzacoes(id);            
             return Ok(new{Farmacia =farmacias,Localizacao =localizacaos});
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////AndPoinst do tipo Delete ⬇️
+        [HttpDelete("ApagarFarmacia{id}")]
+        public async Task<ActionResult> ApagarFarmacia(int id)
+        {
+            await _locali.ApagarLocal(id);
+            await _direcao.Apagardirecao(id);
+            await _ntele.Apagar(id);
+            await _farmfonte.Apagar(id);
+            return Ok();
         }
     }
 }
