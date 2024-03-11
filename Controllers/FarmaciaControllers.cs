@@ -106,11 +106,29 @@ namespace Api_Farmacias.Controllers
         [HttpDelete("ApagarFarmacia{id}")]
         public async Task<ActionResult> ApagarFarmacia(int id)
         {
-            await _locali.ApagarLocal(id);
-            await _direcao.Apagardirecao(id);
+            await _locali.Apagar(id);
+            await _direcao.Apagar(id);
             await _ntele.Apagar(id);
             await _farmfonte.Apagar(id);
             return Ok();
+        }
+        [HttpDelete("ApagarLocalizacao{id}")]
+        public async Task<ActionResult<Localizacao>> ApagarLocate(int id)
+        {
+            var opcao = await _locali.ApagarLocal(id);
+            return Ok(opcao);
+        }
+        [HttpDelete("ApagarDirecao{id}")]
+        public async Task<ActionResult<Localizacao>> ApagarDirecao(int id)
+        {
+            var opcao = await _direcao.Apagardirecao(id);
+            return Ok(opcao);
+        }
+        [HttpDelete("ApagarTelefone{id}")]
+        public async Task<ActionResult<Localizacao>> ApagarTelele(int id)
+        {
+            var opcao = await _locali.ApagarLocal(id);
+            return Ok(opcao);
         }
     }
 }

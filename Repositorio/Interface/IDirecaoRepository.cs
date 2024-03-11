@@ -4,9 +4,11 @@ namespace Api_Farmacias.Repositorio.Interface
     public interface IDirecaoRepository
     {
         Task<Direcao> BuscarDirecaoPorId(int id);
+        Task<Direcao> Buscar(int id);
         Task<List<DirecaoDTO>> direcoes(int id_farm);
         Task<Direcao> AdicionarDirecao(DirecaoDTO direcao);
         Task<Direcao> AtualizarDirecao(DirecaoDTO direcao,int id);
         public Task<bool> Apagardirecao(int id);
+        public Task<bool> Apagar(int id);
     }
 }

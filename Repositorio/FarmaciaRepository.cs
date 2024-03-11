@@ -47,12 +47,7 @@ namespace Api_Farmancias.Repositorio
             if(farmaciaid == null)
             {
                 throw new Exception($"Farmacia para o ID:{id} nao encontrado.");
-            }
-            farmaciaid.Nome = farmacia.Nome;
-            farmaciaid.NIF = farmacia.NIF;
-            farmaciaid.Email = farmacia.Email;
-            farmaciaid.HoraDeabertura = farmacia.HoraDeabertura;
-            farmaciaid.HoraDeEncerramento = farmacia.HoraDeEncerramento;
+            };
             var farmDTO = _mapper.Map<Farmacia>(farmaciaid);
             _conexao.farmacias.Update(farmDTO);
             await _conexao.SaveChangesAsync();

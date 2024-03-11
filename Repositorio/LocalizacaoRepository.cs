@@ -20,6 +20,11 @@ namespace Api_Farmacias.Repositorio
             var lo = await _conexao.localizacaos.FirstOrDefaultAsync(f => f.Id == id_farm);
             return lo;
         }
+        public async Task<Localizacao> Buscar(int id_farm)
+        {
+            var lo = await _conexao.localizacaos.FirstOrDefaultAsync(f => f.farmacia_id == id_farm);
+            return lo;
+        }
         public async Task<Localizacao> AdicionarLocali(LocalizacaoDTO localizacao)
         {
             var farm = _mapper.Map<Localizacao>(localizacao);
@@ -45,6 +50,20 @@ namespace Api_Farmacias.Repositorio
 
         public async Task<bool> ApagarLocal(int id)
         {   var localid = await BuscarLocalPorId(id);
+
+            if(localid == null)
+            {
+                throw new Exception($"O id:{id} não existe.");
+            }
+            var localDto = _mapper.Map<Localizacao>(localid);
+            _conexao.localizacaos.Remove(localDto);
+            await _conexao.SaveChangesAsync();
+
+        return true;
+
+        }
+        public async Task<bool> Apagar(int id)
+        {   var localid = await Buscar(id);
 
             if(localid == null)
             {
