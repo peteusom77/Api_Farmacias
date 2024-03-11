@@ -54,7 +54,7 @@ namespace Api_Farmacias.Repositorio
             _conexao.localizacaos.Remove(localDto);
             await _conexao.SaveChangesAsync();
 
-        return true;
+            return true;
 
         }
 

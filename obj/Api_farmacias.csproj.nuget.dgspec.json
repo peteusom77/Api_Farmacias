@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\alexa\\Desktop\\Nova pasta\\Api_Farmacias\\Api_Farmacias.csproj": {}
+    "C:\\Users\\peteusom\\Desktop\\Estudos\\programacaoGeral\\Api_Farmacias\\Api_Farmacias.csproj": {}
   },
   "projects": {
-    "C:\\Users\\alexa\\Desktop\\Nova pasta\\Api_Farmacias\\Api_Farmacias.csproj": {
+    "C:\\Users\\peteusom\\Desktop\\Estudos\\programacaoGeral\\Api_Farmacias\\Api_Farmacias.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\alexa\\Desktop\\Nova pasta\\Api_Farmacias\\Api_Farmacias.csproj",
+        "projectUniqueName": "C:\\Users\\peteusom\\Desktop\\Estudos\\programacaoGeral\\Api_Farmacias\\Api_Farmacias.csproj",
         "projectName": "Api_Farmacias",
-        "projectPath": "C:\\Users\\alexa\\Desktop\\Nova pasta\\Api_Farmacias\\Api_Farmacias.csproj",
-        "packagesPath": "C:\\Users\\alexa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\alexa\\Desktop\\Nova pasta\\Api_Farmacias\\obj\\",
+        "projectPath": "C:\\Users\\peteusom\\Desktop\\Estudos\\programacaoGeral\\Api_Farmacias\\Api_Farmacias.csproj",
+        "packagesPath": "C:\\Users\\peteusom\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\peteusom\\Desktop\\Estudos\\programacaoGeral\\Api_Farmacias\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\alexa\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\peteusom\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -32,11 +39,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -91,7 +93,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

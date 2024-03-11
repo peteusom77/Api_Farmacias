@@ -23,7 +23,7 @@ namespace Api_Farmacias.Controllers
             _ntele = n_TelefoneRepository;
         }
 
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////AndPoinst do tipo Post ⬇️
         [HttpPost]
         [Route("adicionarFarmacia")]
@@ -55,6 +55,46 @@ namespace Api_Farmacias.Controllers
                 locali.farmacia_id = farmacia.Id;
                 var localizacao = await _locali.AdicionarLocali(locali);
                 return Ok(localizacao);
+            }
+            catch (Exception ex)
+            {
+                // Lide com a exceção de maneira apropriada, log ou retorne um erro HTTP 500, se necessário.
+                return StatusCode(500, $"Erro ao adicionar localização: {ex.Message}");
+            }
+        }
+        [HttpPost("Adicionardirecao/{id_farm}")]
+        public async Task<ActionResult<Localizacao>> Adicionardirecao([FromBody] DirecaoDTO dire, int id_farm)
+        {
+            try
+            {
+                var farmacia = await _farmfonte.BuscarFarmacia(id_farm);
+                if (farmacia == null)
+                {
+                    return NotFound($"Farmácia com ID {id_farm} não encontrada.");
+                }
+                dire.farmacia_id = farmacia.Id;
+                var direcaoo = await _direcao.AdicionarDirecao(dire);
+                return Ok(direcaoo);
+            }
+            catch (Exception ex)
+            {
+                // Lide com a exceção de maneira apropriada, log ou retorne um erro HTTP 500, se necessário.
+                return StatusCode(500, $"Erro ao adicionar localização: {ex.Message}");
+            }
+        }
+        [HttpPost("AdicionarN_telefone/{id_farm}")]
+        public async Task<ActionResult<Localizacao>> AdicionarN_telefone([FromBody] N_telefoneDTO nume, int id_farm)
+        {
+            try
+            {
+                var farmacia = await _farmfonte.BuscarFarmacia(id_farm);
+                if (farmacia == null)
+                {
+                    return NotFound($"Farmácia com ID {id_farm} não encontrada.");
+                }
+                nume.farmacia_id = farmacia.Id;
+                var n_Telefone = await _ntele.AdicionarN_telefone(nume);
+                return Ok(n_Telefone);
             }
             catch (Exception ex)
             {
@@ -97,8 +137,10 @@ namespace Api_Farmacias.Controllers
             {
                 return NotFound();
             }
-            List<LocalizacaoDTO> localizacaos= await _locali.localzacoes(id);            
-            return Ok(new{Farmacia =farmacias,Localizacao =localizacaos});
+            List<LocalizacaoDTO> localizacaos= await _locali.localzacoes(id);
+            List<DirecaoDTO> direcaoDTOs = await _direcao.direcoes(id);
+            List<N_telefoneDTO> n_TelefoneDTOs = await _ntele.telefones(id);    
+            return Ok(new{Farmacia =farmacias,Localizacao =localizacaos,Direcao =direcaoDTOs,N_telefone = n_TelefoneDTOs});
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
