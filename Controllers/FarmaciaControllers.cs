@@ -72,11 +72,11 @@ namespace Api_Farmacias.Controllers
             todos.n_TelefoneDTO.farmacia_id = id;
             
             var farmacia = await _farmfonte.Atualizar(todos.farmaciaDTO, id);
-            var locate = await _locali.Atualizar(todos.localizacaoDTO, id);
+            var locate = await _locali.AtualizarLocal(todos.localizacaoDTO, id);
             var direcao = await _direcao.AtualizarDirecao(todos.direcaoDTO, id);
             var telefone = await _ntele.AtualizarN_telefone(todos.n_TelefoneDTO, id);
 
-            return Ok(new Todos {farmaciaDTO = farmacia, localizacaoDTO = locate, direcaoDTO = direcao, n_TelefoneDTO = telefone});
+            return Ok();
         }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////AndPoinst do tipo Get ⬇️
