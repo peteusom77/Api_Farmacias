@@ -26,10 +26,10 @@ namespace Api_Farmancias.Repositorio
             var farmDTO =_mapper.Map<List<FarmaciaDTO>>(ListFArm);
             return farmDTO;
         }
-        public async Task<FarmaciaDTO> BuscarFarmacia(int id)
+        public async Task<Farmacia> BuscarFarmacia(int id)
         {
             var farmacia = await _conexao.farmacias.Where(x => x.Id == id).FirstOrDefaultAsync();
-            var farmDTO = _mapper.Map<FarmaciaDTO>(farmacia);
+            var farmDTO = _mapper.Map<Farmacia>(farmacia);
             return farmDTO ;
         }
 
