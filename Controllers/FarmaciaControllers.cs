@@ -84,5 +84,17 @@ namespace Api_Farmacias.Controllers
             FarmaciaDTO farmacias = await _farmfonte.BuscarFarmacia(id);
             return Ok(farmacias);
         }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////AndPoinst do tipo Delete ⬇️
+        [HttpDelete("ApagarFarmacia{id}")]
+        public async Task<ActionResult> ApagarFarmacia(int id)
+        {
+            await _farmfonte.Apagar(id);
+            await _direcao.Apagardirecao(id);
+            await _locali.ApagarLocal(id);
+            await _ntele.Apagartelele(id);
+            return Ok();
+        }
     }
 }

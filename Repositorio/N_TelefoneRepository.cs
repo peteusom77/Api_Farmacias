@@ -17,10 +17,11 @@ namespace Api_Farmacias.Repositorio
             _conexao =appdbcontext;
             _mapper= mapper;
         }
-        public async Task<Farmacia> BuscarN_telefone(int Num)
+        public async Task<N_telefoneDTO> BuscarN_telefone(int id)
         {
-            var numT = await _conexao.farmacias.FirstOrDefaultAsync(f =>f.Id == Num);
-            return numT;
+            var telele = await _conexao.n_Telefones.Where(x => x.farmacia_id == id).FirstOrDefaultAsync();
+            var teleleDTO = _mapper.Map<N_telefoneDTO>(telele);
+            return teleleDTO;
         }
         public async Task<N_telefone> AdicionarN_telefone(N_telefoneDTO n_Telefone)
         {
@@ -42,6 +43,18 @@ namespace Api_Farmacias.Repositorio
                 _conexao.n_Telefones.Update(n_teleDto);
                 await _conexao.SaveChangesAsync();
                 return n_teleDto;
+        }
+        public async Task<bool> Apagartelele(int id)
+        {
+            var telele = BuscarN_telefone(id);
+            if(telele == null)
+            {
+                throw new Exception($"O id:{id} não existe.");
+            }
+            var teleleDto =_mapper.Map<N_telefone>(telele);
+            _conexao.n_Telefones.Remove(teleleDto);
+            await _conexao.SaveChangesAsync();
+            return true;
         }
     }
 }

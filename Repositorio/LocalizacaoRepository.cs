@@ -14,10 +14,11 @@ namespace Api_Farmacias.Repositorio
             _conexao =appdbcontext;
             _mapper =mapper;
         }
-        public async Task<Farmacia> BuscarLocalPorId(int id_farm)
+        public async Task<LocalizacaoDTO> BuscarLocalPorId(int id)
         {
-            var lo = await _conexao.farmacias.FirstOrDefaultAsync(f => f.Id == id_farm);
-            return lo;
+            var locate = await _conexao.localizacaos.Where(x => x.farmacia_id == id).FirstOrDefaultAsync();
+            var locateDTO = _mapper.Map<LocalizacaoDTO>(locate);
+            return locateDTO ;
         }
         public async Task<Localizacao> AdicionarLocali(LocalizacaoDTO localizacao)
         {
@@ -43,20 +44,16 @@ namespace Api_Farmacias.Repositorio
         
 
         public async Task<bool> ApagarLocal(int id)
-        {   var localid = BuscarLocalPorId(id);
-
+        {   
+            var localid = BuscarLocalPorId(id);
             if(localid == null)
             {
                 throw new Exception($"O id:{id} não existe.");
             }
-          var localDto =_mapper.Map<Localizacao>(localid);
-          _conexao.localizacaos.Remove(localDto);
-          await _conexao.SaveChangesAsync();
-
-        return true;
-
+            var localDto =_mapper.Map<Localizacao>(localid);
+            _conexao.localizacaos.Remove(localDto);
+            await _conexao.SaveChangesAsync();
+            return true;
         }
-
-        
     }
 }

@@ -16,10 +16,11 @@ namespace Api_Farmacias.Repositorio
             _mapper= mapper;
 
         }
-            public async Task<Farmacia> BuscarDirecaoPorId(int id)
+            public async Task<DirecaoDTO> BuscarDirecaoPorId(int id)
             {
-                var dir = await _conexao.farmacias.FirstOrDefaultAsync(f => f.Id == id);
-                return dir;
+                var direcao = await _conexao.direcaos.Where(x => x.farmacia_id == id).FirstOrDefaultAsync();
+                var direcaoDTO = _mapper.Map<DirecaoDTO>(direcao);
+                return direcaoDTO ;
             }
         
             public async Task<Direcao> AdicionarDirecao(DirecaoDTO direcao)
@@ -43,18 +44,16 @@ namespace Api_Farmacias.Repositorio
                 return direcaoDto;
             }
             public async Task<bool> Apagardirecao(int id)
-             {  var direcaoid = BuscarDirecaoPorId(id);
-
+            {
+            var direcaoid = await BuscarDirecaoPorId(id);
             if(direcaoid == null)
             {
                 throw new Exception($"O id:{id} não existe.");
             }
-          var direcaoDto =_mapper.Map<Direcao>(direcaoid);
-          _conexao.direcaos.Remove(direcaoDto);
-          await _conexao.SaveChangesAsync();
-
-        return true;
-
+            var direcaoDto =_mapper.Map<Direcao>(direcaoid);
+            _conexao.direcaos.Remove(direcaoDto);
+            await _conexao.SaveChangesAsync();
+            return true;
         }
 
         
