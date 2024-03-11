@@ -25,6 +25,23 @@ namespace Api_Farmacias.Controllers
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////AndPoinst do tipo Post ⬇️
+        [HttpPost]
+        [Route("adicionarFarmacia")]
+        public async Task<ActionResult<Farmacia>>Adicionarfarm([FromBody] Todos todos)
+        {
+            Farmacia farmacias = await _farmfonte.AdicionarFarmacia(todos.farmaciaDTO);
+            //
+            todos.localizacaoDTO.farmacia_id = farmacias.Id;//para o atributo id farmacia receber o id fda farmacia criada
+            Localizacao localizacao = await _locali.AdicionarLocali(todos.localizacaoDTO);
+            //
+            todos.direcaoDTO.farmacia_id=farmacias.Id;
+            Direcao direcao = await _direcao.AdicionarDirecao(todos.direcaoDTO);
+            //
+            todos.n_TelefoneDTO.farmacia_id =farmacias.Id;
+            N_telefone n_Telefone = await _ntele.AdicionarN_telefone(todos.n_TelefoneDTO);
+            //
+            return Ok(new { Farmacia = farmacias, Localizacao = localizacao,  N_Telefone = n_Telefone, Direcao = direcao});
+        }
         [HttpPost("AdicionarLocalizacao/{id_farm}")]
         public async Task<ActionResult<Localizacao>> AdicionarLocalizacao([FromBody] LocalizacaoDTO locali, int id_farm)
         {
