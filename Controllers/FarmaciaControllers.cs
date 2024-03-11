@@ -57,13 +57,19 @@ namespace Api_Farmacias.Controllers
             }
             catch (Exception ex)
             {
-                // Lide com a exceção de maneira apropriada, log ou retorne um erro HTTP 500, se necessário.
+                 // Lide com a exceção de maneira apropriada, log ou retorne um erro HTTP 500, se necessário.
                 return StatusCode(500, $"Erro ao adicionar localização: {ex.Message}");
             }
         }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////AndPoinst do tipo Put ⬇️
-
+        [HttpPut("AtualizarFarmacia{id:int}")]
+        public async Task<ActionResult<Farmacia>> Atualiza([FromBody] FarmaciaDTO farmacia1, int id)
+        {
+            farmacia1.Id = id; 
+            var farmacia = await _farmfonte.Atualizar(farmacia1, id);
+            return Ok(farmacia);
+        }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////AndPoinst do tipo Get ⬇️
         [HttpGet("ListarFarmacias")]
