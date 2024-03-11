@@ -27,9 +27,36 @@ namespace Api_Farmacias.Repositorio
             return farm;
         }
 
-        public Task<Localizacao> Atualizar(Localizacao localizacao, int id)
+        public async Task<Localizacao> AtualizarLocal(Localizacao localizacao, int id)
         {
-            throw new NotImplementedException();
+            var localid = BuscarLocalPorId(id);
+              if(localid == null)
+                {
+                    throw new Exception($"O id:{id} não existe.");
+                }
+                var localDto=_mapper.Map<Localizacao>(localid);
+                _conexao.localizacaos.Update(localDto);
+                await _conexao.SaveChangesAsync();
+                return localDto;
         }
+
+        
+
+        public async Task<bool> ApagarLocal(int id)
+        {   var localid = BuscarLocalPorId(id);
+
+            if(localid == null)
+            {
+                throw new Exception($"O id:{id} não existe.");
+            }
+          var localDto =_mapper.Map<Localizacao>(localid);
+          _conexao.localizacaos.Remove(localDto);
+          await _conexao.SaveChangesAsync();
+
+        return true;
+
+        }
+
+        
     }
 }
