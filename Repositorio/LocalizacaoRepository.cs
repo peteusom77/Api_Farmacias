@@ -28,7 +28,11 @@ namespace Api_Farmacias.Repositorio
             return farm;
         }
 
+<<<<<<< HEAD
         public async Task<Localizacao> AtualizarLocal(Localizacao localizacao, int id)
+=======
+        public Task<Localizacao> Atualizar(LocalizacaoDTO localizacao, int id)
+>>>>>>> c6c3be87503ea9928465a729cc0faf8cbcab921d
         {
             var localid = BuscarLocalPorId(id);
               if(localid == null)

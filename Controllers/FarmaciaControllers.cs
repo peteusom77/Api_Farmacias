@@ -1,3 +1,4 @@
+using Api_Farmacias.DTO;
 using Api_Farmacias.Model;
 using Api_Farmacias.Repositorio.Interface;
 using Api_Farmacias.Repositorio.InterFace;
@@ -63,11 +64,19 @@ namespace Api_Farmacias.Controllers
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////AndPoinst do tipo Put ⬇️
         [HttpPut("AtualizarFarmacia{id:int}")]
-        public async Task<ActionResult<Farmacia>> Atualiza([FromBody] FarmaciaDTO farmacia1, int id)
+        public async Task<ActionResult<Todos>> Atualiza([FromBody] Todos todos, int id)
         {
-            farmacia1.Id = id; 
-            var farmacia = await _farmfonte.Atualizar(farmacia1, id);
-            return Ok(farmacia);
+            todos.farmaciaDTO.Id = id;
+            todos.localizacaoDTO.farmacia_id = id;
+            todos.direcaoDTO.farmacia_id = id;
+            todos.n_TelefoneDTO.farmacia_id = id;
+            
+            var farmacia = await _farmfonte.Atualizar(todos.farmaciaDTO, id);
+            var locate = await _locali.Atualizar(todos.localizacaoDTO, id);
+            var direcao = await _direcao.AtualizarDirecao(todos.direcaoDTO, id);
+            var telefone = await _ntele.AtualizarN_telefone(todos.n_TelefoneDTO, id);
+
+            return Ok(new Todos {farmaciaDTO = farmacia, localizacaoDTO = locate, direcaoDTO = direcao, n_TelefoneDTO = telefone});
         }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////AndPoinst do tipo Get ⬇️
