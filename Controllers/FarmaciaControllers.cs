@@ -22,12 +22,13 @@ namespace Api_Farmacias.Controllers
             _locali =localizacaoRepository;
             _ntele = n_TelefoneRepository;
         }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////AndPoinst do tipo Post ⬇️
-        [HttpPost]
-        [Route("adicionarFarmacia")]
-        public async Task<ActionResult<Farmacia>>Adicionarfarm([FromBody] Todos todos)
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////AndPoinst do tipo Delete ⬇️
+        [HttpDelete("ApagarFarmacia{id}")]
+        public async Task<ActionResult> ApagarFarmacia(int id)
         {
+<<<<<<< HEAD
             Farmacia farmacias = await _farmfonte.AdicionarFarmacia(todos.farmaciaDTO);
             //
             todos.localizacaoDTO.farmacia_id = farmacias.Id;//para o atributo id farmacia receber o id fda farmacia criada
@@ -108,6 +109,11 @@ namespace Api_Farmacias.Controllers
             await _locali.ApagarLocal(id);
             await _direcao.Apagardirecao(id);
             await _ntele.Apagar(id);
+=======
+            await _locali.ApagarLocal(id);
+            await _direcao.Apagardirecao(id);
+            await _ntele.Apagartelele(id);
+>>>>>>> e8c4fd805e93ed5adf13aafb1b18d9af2134649b
             await _farmfonte.Apagar(id);
             return Ok();
         }

@@ -41,31 +41,33 @@ namespace Api_Farmancias.Repositorio
             return farmDTO;
         }
 
-       public async Task<Farmacia> Atualizar(FarmaciaDTO farmacia, int id)
+       public async Task<FarmaciaDTO> Atualizar(FarmaciaDTO farmacia, int id)
         {
             var farmaciaid = await BuscarFarmacia(id);
             if(farmaciaid == null)
             {
                 throw new Exception($"Farmacia para o ID:{id} nao encontrado.");
             }
-
+            farmaciaid.Nome = farmacia.Nome;
+            farmaciaid.NIF = farmacia.NIF;
+            farmaciaid.Email = farmacia.Email;
+            farmaciaid.HoraDeabertura = farmacia.HoraDeabertura;
+            farmaciaid.HoraDeEncerramento = farmacia.HoraDeEncerramento;
             var farmDTO = _mapper.Map<Farmacia>(farmaciaid);
             _conexao.farmacias.Update(farmDTO);
             await _conexao.SaveChangesAsync();
 
-            return farmDTO;
+            return farmacia;
         }
 
         public async Task<bool> Apagar(int id)
         {
-            var farmaciaid = await BuscarFarmacia(id);
+            Farmacia farmaciaid = await BuscarFarmacia(id);
             if(farmaciaid == null)
             {
                 throw new Exception($"Farmacia para o ID:{id} nao encontrado.");
             }
-            var farmDTO =_mapper.Map<Farmacia>(farmaciaid);
-
-            _conexao.farmacias.Remove(farmDTO);
+            _conexao.farmacias.Remove(farmaciaid);
             await _conexao.SaveChangesAsync();
             return true;
         }

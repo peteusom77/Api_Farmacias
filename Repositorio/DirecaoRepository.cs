@@ -18,8 +18,14 @@ namespace Api_Farmacias.Repositorio
         }
             public async Task<Direcao> BuscarDirecaoPorId(int id)
             {
+<<<<<<< HEAD
                 var dir = await _conexao.direcaos.FirstOrDefaultAsync(f => f.Id == id);
                 return dir;
+=======
+                var direcao = await _conexao.direcaos.Where(x => x.farmacia_id == id).FirstOrDefaultAsync();
+                var direcaoDTO = _mapper.Map<Direcao>(direcao);
+                return direcaoDTO ;
+>>>>>>> e8c4fd805e93ed5adf13aafb1b18d9af2134649b
             }
         
             public async Task<Direcao> AdicionarDirecao(DirecaoDTO direcao)
@@ -43,18 +49,29 @@ namespace Api_Farmacias.Repositorio
                 return direcaoDto;
             }
             public async Task<bool> Apagardirecao(int id)
+<<<<<<< HEAD
              {  var direcaoid = await BuscarDirecaoPorId(id);
 
+=======
+            {
+            Direcao direcaoid = await BuscarDirecaoPorId(id);
+>>>>>>> e8c4fd805e93ed5adf13aafb1b18d9af2134649b
             if(direcaoid == null)
             {
                 throw new Exception($"O id:{id} não existe.");
             }
+<<<<<<< HEAD
             var direcaoDto =_mapper.Map<Direcao>(direcaoid);
             _conexao.direcaos.Remove(direcaoDto);
             await _conexao.SaveChangesAsync();
 
             return true;
 
+=======
+            _conexao.direcaos.Remove(direcaoid);
+            await _conexao.SaveChangesAsync();
+            return true;
+>>>>>>> e8c4fd805e93ed5adf13aafb1b18d9af2134649b
         }
 
         public async Task<List<DirecaoDTO>> direcoes(int id_farm)

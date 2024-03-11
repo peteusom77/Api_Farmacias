@@ -210,6 +210,7 @@ C:\Users\Lenovo\Desktop\Api_Farmacias\obj\Debug\net8.0\refint\Api_Farmacias.dll
 C:\Users\Lenovo\Desktop\Api_Farmacias\obj\Debug\net8.0\Api_Farmacias.pdb
 C:\Users\Lenovo\Desktop\Api_Farmacias\obj\Debug\net8.0\Api_Farmacias.genruntimeconfig.cache
 C:\Users\Lenovo\Desktop\Api_Farmacias\obj\Debug\net8.0\ref\Api_Farmacias.dll
+<<<<<<< HEAD
 C:\Users\peteusom\Desktop\Estudos\programacaoGeral\Api_Farmacias\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\peteusom\Desktop\Estudos\programacaoGeral\Api_Farmacias\bin\Debug\net8.0\appsettings.json
 C:\Users\peteusom\Desktop\Estudos\programacaoGeral\Api_Farmacias\bin\Debug\net8.0\Api_Farmacias.exe
@@ -316,6 +317,8 @@ C:\Users\peteusom\Desktop\Estudos\programacaoGeral\Api_Farmacias\obj\Debug\net8.
 C:\Users\peteusom\Desktop\Estudos\programacaoGeral\Api_Farmacias\obj\Debug\net8.0\Api_Farmacias.pdb
 C:\Users\peteusom\Desktop\Estudos\programacaoGeral\Api_Farmacias\obj\Debug\net8.0\Api_Farmacias.genruntimeconfig.cache
 C:\Users\peteusom\Desktop\Estudos\programacaoGeral\Api_Farmacias\obj\Debug\net8.0\ref\Api_Farmacias.dll
+=======
+>>>>>>> e8c4fd805e93ed5adf13aafb1b18d9af2134649b
 C:\Users\alexa\Desktop\Nova pasta\Api_Farmacias\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\alexa\Desktop\Nova pasta\Api_Farmacias\bin\Debug\net8.0\appsettings.json
 C:\Users\alexa\Desktop\Nova pasta\Api_Farmacias\bin\Debug\net8.0\Api_Farmacias.exe
